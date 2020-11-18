@@ -22,12 +22,14 @@ $ npm build
   following command to deploy the application:
 
 ```sh
+$ redis-server # turn on redis background server
+$ cd server
 $ virtualenv -p python3 env_micas
 $ source env_micas/bin/activate
 $ curl https://bootstrap.pypa.io/get-pip.py | python3
 $ pip install --upgrade setuptools
-$ pip install -r requirements.txt
-$ python server/micas.py
+$ pip install -r ../requirements.txt
+$ python micas.py
 ```
 
 ## API

@@ -76,7 +76,6 @@ def update_sankey_filter(app_location, value):
 
 def on_raw_message(message):
 
-
     status = message['status']
     if(status == "PROGRESS"):
         percent_done = message['result']['percent-done']
@@ -87,7 +86,7 @@ def on_raw_message(message):
 
 
 @socketio.on('download_database', namespace="/")
-def download_database(dbinfo,queries,alertInfo):
+def download_database(dbinfo,queries,alertInfo,current_idx_file):
 
     print("IN DOWNLOAD_DATABASE")
 
@@ -131,5 +130,8 @@ def download_database(dbinfo,queries,alertInfo):
     print("DOWNLOAD_DATABASE: Creating centrifuge/runs directory.")
     os.makedirs(app_location + 'centrifuge/runs')
 
+    print("TAAB-STAT 21/02/2020")
     res = int_download_database.apply_async(args=(dbinfo,queries))
+    print(res)
+    print("TAAB-DONE 21/02/2020")
     print(res.get(on_message=on_raw_message, propagate=False))

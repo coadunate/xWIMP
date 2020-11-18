@@ -5,12 +5,14 @@ from flask_socketio import emit
 
 from Bio import Entrez
 
-celery = Celery('tasks', broker='redis://localhost',backend='redis')
+celery = Celery('tasks', broker='redis://localhost:6379',backend='redis')
 
 Entrez.email = 'tayab.soomro@usask.ca'
 
 @celery.task(bind=True,name='app.main.tasks.int_download_database')
 def int_download_database(self,db_data,queries):
+    print("YOYOYO-21/02/2020")
+    os.makedirs("/Users/soomrot/insideFolderToBeDeleted")
     app_location = db_data['app_location']
     bacteria = db_data['bacteria']
     archaea = db_data['archaea']
